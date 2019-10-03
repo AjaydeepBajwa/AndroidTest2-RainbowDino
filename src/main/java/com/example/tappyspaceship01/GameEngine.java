@@ -102,8 +102,8 @@ public class GameEngine extends SurfaceView implements Runnable {
         Item[] objectArray = {rainbow, candy, garbage};
         random = new Random();
         int i = random.nextInt(objectArray.length);
-        this.object = objectArray[i];
-        //this.objects.add(objectArray[i]);
+        //this.object = objectArray[i];
+        this.objects.add(objectArray[i]);
 
 
         this.printScreenInfo();
@@ -177,22 +177,30 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     public void updatePositions() {
 
-        int x = this.object.getHitbox().centerX();
-        System.out.println("Xxxxxxxxxxxxxcxcxcxcxcxcxcxcxxzcx: " +x);
+
+
         this.objectMovement();
-        if ((this.object.getHitbox().intersect(this.player.getHitbox())) == true){
-            this.lives = this.lives - 1;
-            Log.d(TAG,"LIVES ARE :"+ this.lives);
+        for (int i=0;i<this.objects.size();i++) {
+            if ((this.objects.get(i).getHitbox().intersect(this.player.getHitbox())) == true) {
+                //this.obje
+                int x = this.objects.get(i).getHitbox().centerX();
+                System.out.println("Xxxxxxxxxxxxxcxcxcxcxcxcxcxcxxzcx: " +x);
+                this.lives = this.lives - 1;
+                Log.d(TAG, "LIVES ARE :" + this.lives);
+            }
         }
 
 
     }
 
     public void objectMovement(){
-        int objectX = this.object.getxPosition();
-        if (objectX < this.screenWidth- this.player.getImage().getWidth()){
-            this.object.updateHitBox();
-            this.object.setxPosition(this.object.getxPosition() + 20);
+
+        for (int i=0;i<this.objects.size();i++) {
+            int objectX = this.objects.get(i).getxPosition();
+            if (objectX < this.screenWidth - this.player.getImage().getWidth()) {
+                this.objects.get(i).updateHitBox();
+                this.objects.get(i).setxPosition(this.objects.get(i).getxPosition() + 20);
+            }
         }
 
     }
@@ -224,10 +232,10 @@ public class GameEngine extends SurfaceView implements Runnable {
             this.canvas.drawRect(20,this.screenHeight/6+600,this.screenWidth-300,this.screenHeight/6+600 + 20,paintbrush);
             this.canvas.drawText("SCORE = " +this.score+"",this.screenWidth-300,50,paintbrush);
             this.canvas.drawText("LIVES = " +this.lives+"",this.screenWidth-700,50,paintbrush);
-            this.canvas.drawBitmap(this.object.getImage(),this.object.getxPosition(),this.object.getyPosition(),paintbrush);
-//            for (int i=0;i<this.objects.size();i++){
-//                this.canvas.drawBitmap(this.objects.get(i).getImage(),this.objects.get(i).getxPosition(),this.objects.get(i).getyPosition(),paintbrush);
-//            }
+            //this.canvas.drawBitmap(this.object.getImage(),this.object.getxPosition(),this.object.getyPosition(),paintbrush);
+            for (int i=0;i<this.objects.size();i++){
+                this.canvas.drawBitmap(this.objects.get(i).getImage(),this.objects.get(i).getxPosition(),this.objects.get(i).getyPosition(),paintbrush);
+            }
             this.canvas.drawBitmap(this.player.getImage(),this.player.getxPosition(),this.player.getyPosition(),paintbrush);
 //            this.canvas.drawBitmap(this.rainbow.getImage(),this.rainbow.getxPosition(),this.rainbow.getyPosition(),paintbrush);
 //            this.canvas.drawBitmap(this.candy.getImage(),this.candy.getxPosition(),this.candy.getyPosition(),paintbrush);
