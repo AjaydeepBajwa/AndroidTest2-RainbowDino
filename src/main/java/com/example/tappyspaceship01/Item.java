@@ -16,11 +16,21 @@ public class Item {
 
     private int xPosition;
     private int yPosition;
+    private int imagePath;
+
+    public int getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(int imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public Item(Context context, int x, int y, int imagePath) {
         // 1. set up the initial position of the Enemy
         this.xPosition = x;
         this.yPosition = y;
+        this.imagePath = imagePath;
         this.image = BitmapFactory.decodeResource(context.getResources(), imagePath);
 
         // 2. Set the default image - all enemies have same image
