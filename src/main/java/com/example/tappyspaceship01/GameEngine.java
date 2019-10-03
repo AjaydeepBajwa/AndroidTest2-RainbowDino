@@ -166,14 +166,18 @@ public class GameEngine extends SurfaceView implements Runnable {
 
         this.objectMovement();
         for (int i = 0; i < this.objects.size(); i++) {
-            if (((this.objects.get(i).getHitbox().intersect(this.player.getHitbox())) == true) && (this.objects.get(i).getImagePath() == R.drawable.candy64)) {
-                
-                int x = this.objects.get(i).getHitbox().centerX();
-                System.out.println("Xxxxxxxxxxxxxcxcxcxcxcxcxcxcxxzcx: " + x);
-                this.score = this.score + 1;
-                this.objects.remove(i);
+            if (((this.objects.get(i).getHitbox().intersect(this.player.getHitbox())) == true)) {
+                if (((this.objects.get(i).getImagePath() == R.drawable.candy64)) || (this.objects.get(i).getImagePath() == R.drawable.rainbow64)) {
+                    int x = this.objects.get(i).getHitbox().centerX();
+                    System.out.println("Xxxxxxxxxxxxxcxcxcxcxcxcxcxcxxzcx: " + x);
+                    this.score = this.score + 1;
+                    this.objects.remove(i);
+
+                    Log.d(TAG, "LIVES ARE :" + this.lives);
+                }
+            }
+            else if (this.objects.get(i).getImagePath() == R.drawable.poop64){
                 this.lives = this.lives - 1;
-                Log.d(TAG, "LIVES ARE :" + this.lives);
             }
         }
         this.spawnObjects();
