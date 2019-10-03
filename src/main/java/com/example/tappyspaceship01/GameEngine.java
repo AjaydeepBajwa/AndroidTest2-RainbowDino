@@ -217,7 +217,15 @@ public class GameEngine extends SurfaceView implements Runnable {
             if (objectX < this.screenWidth - this.player.getImage().getWidth()) {
                 //updating object Hitbox with new coordinates
                 this.objects.get(i).updateHitBox();
-                this.objects.get(i).setxPosition(this.objects.get(i).getxPosition() + 20);
+                if (this.objects.get(i).getImagePath() == R.drawable.rainbow64) {
+                    this.objects.get(i).setxPosition(this.objects.get(i).getxPosition() + 60);
+                }
+                else if (this.objects.get(i).getImagePath() == R.drawable.candy64) {
+                    this.objects.get(i).setxPosition(this.objects.get(i).getxPosition() + 40);
+                }
+                else if (this.objects.get(i).getImagePath() == R.drawable.poop64) {
+                    this.objects.get(i).setxPosition(this.objects.get(i).getxPosition() + 25);
+                }
             }
         }
 
@@ -277,7 +285,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     public void setFPS() {
         try {
-            gameThread.sleep(60);
+            gameThread.sleep(40);
         } catch (Exception e) {
 
         }
