@@ -135,6 +135,16 @@ public class GameEngine extends SurfaceView implements Runnable {
     // ------------------------------
 
     public void updatePositions() {
+
+        this.playerMovement();
+    }
+    public void playerMovement(){
+        if ((this.playerMoveUp == true)&&(this.player.getyPosition()> 0)){
+            this.player.setyPosition(player.getyPosition() - 200);
+        }
+        else if ((this.playerMoveUp == false)&&(this.player.getyPosition()< this.screenHeight - 150)){
+            this.player.setyPosition(player.getyPosition() + 200);
+        }
     }
 
     public void redrawSprites() {
@@ -188,8 +198,16 @@ public class GameEngine extends SurfaceView implements Runnable {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int userAction = event.getActionMasked();
+        float fingerYPosition = event.getY();
+        //float fingerYPosition = event.getY();
         //@TODO: What should happen when person touches the screen?
         if (userAction == MotionEvent.ACTION_DOWN) {
+            if (fingerYPosition < this.screenHeight/2){
+                this.playerMoveUp = true;
+            }
+            else if(fingerYPosition > this.screenHeight /2){
+                this.playerMoveUp = false;
+            }
 
         }
         else if (userAction == MotionEvent.ACTION_UP) {
