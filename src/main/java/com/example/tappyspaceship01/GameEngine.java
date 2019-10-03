@@ -40,8 +40,13 @@ public class GameEngine extends SurfaceView implements Runnable {
     Item rainbow;
     Item candy;
     Item garbage;
+    int ObjectY = 100;
     boolean playerMoveUp;
+    Item object;
     public ArrayList<Item> objects = new ArrayList<Item>();
+
+    Random random;
+    Item objectToShow;
 
 
 
@@ -82,13 +87,23 @@ public class GameEngine extends SurfaceView implements Runnable {
 //        this.lane2Y = this.screenHeight/6+200;
 //        this.lane3Y = this.screenHeight/6+400;
 //        this.lane4Y = this.screenHeight/6+500;
+        //this.ObjectY = (this.screenHeight/6)-150;
+        this.spawnObjects();
 
 
 
         player =  new Player(context,this.screenWidth - 200,(this.screenHeight/6+200) - 150);
-        rainbow = new Item(context,20,(this.screenHeight/6+200)-150,R.drawable.rainbow64);
-        candy = new Item(context,20,(this.screenHeight/6)-150,R.drawable.candy64);
-        garbage = new Item(context,20,(this.screenHeight/6+400)-150,R.drawable.poop64);
+
+        this.spawnObjects();
+        rainbow = new Item(context,20, this.ObjectY,R.drawable.rainbow64);
+        candy = new Item(context,20, this.ObjectY,R.drawable.candy64);
+        garbage = new Item(context,20, this.ObjectY,R.drawable.poop64);
+
+        Item[] objectArray = {rainbow, candy, garbage};
+        random = new Random();
+        int i = random.nextInt(objectArray.length);
+        this.object = objectArray[i];
+        //this.objects.add(objectArray[i]);
 
 
         this.printScreenInfo();
@@ -104,8 +119,23 @@ public class GameEngine extends SurfaceView implements Runnable {
     private void spawnPlayer() {
         //@TODO: Start the player at the left side of screen
     }
-    private void spawnEnemyShips() {
-        Random random = new Random();
+    private void spawnObjects() {
+        random = new Random();
+        this.lane1Y = (this.screenHeight/6+200)-150;
+        this.lane2Y = (this.screenHeight/6)-150;
+        this.lane3Y = (this.screenHeight/6+400)-150;
+        this.lane4Y = (this.screenHeight/6 + 600-150);
+        int[] intArray = {lane1Y, lane2Y, lane3Y,lane4Y};
+
+        int rnd = random.nextInt(intArray.length);
+        this.ObjectY = intArray[rnd];
+        //String rd = "Value is " + (intArray[this.ObjectY]);
+
+        //System.out.println(rd);
+
+//        rainbow = new Item(context,20,(this.screenHeight/6+200)-150,R.drawable.rainbow64);
+//        candy = new Item(context,20,(this.screenHeight/6)-150,R.drawable.candy64);
+//        garbage = new Item(context,20,(this.screenHeight/6+400)-150,R.drawable.poop64);
 
         //@TODO: Place the enemies in a random location
 
@@ -175,10 +205,14 @@ public class GameEngine extends SurfaceView implements Runnable {
             this.canvas.drawRect(20,this.screenHeight/6+600,this.screenWidth-300,this.screenHeight/6+600 + 20,paintbrush);
             this.canvas.drawText("SCORE = " +this.score+"",this.screenWidth-300,50,paintbrush);
             this.canvas.drawText("LIVES = " +this.lives+"",this.screenWidth-700,50,paintbrush);
-            this.canvas.drawBitmap(this.player.getImage(),this.player.getxPosition(),this.player.getyPosition(),paintbrush);
-            this.canvas.drawBitmap(this.rainbow.getImage(),this.rainbow.getxPosition(),this.rainbow.getyPosition(),paintbrush);
-            this.canvas.drawBitmap(this.candy.getImage(),this.candy.getxPosition(),this.candy.getyPosition(),paintbrush);
-            this.canvas.drawBitmap(this.garbage.getImage(),this.garbage.getxPosition(),this.garbage.getyPosition(),paintbrush);
+            this.canvas.drawBitmap(this.object.getImage(),this.object.getxPosition(),this.object.getyPosition(),paintbrush);
+//            for (int i=0;i<this.objects.size();i++){
+//                this.canvas.drawBitmap(this.objects.get(i).getImage(),this.objects.get(i).getxPosition(),this.objects.get(i).getyPosition(),paintbrush);
+//            }
+//            this.canvas.drawBitmap(this.player.getImage(),this.player.getxPosition(),this.player.getyPosition(),paintbrush);
+//            this.canvas.drawBitmap(this.rainbow.getImage(),this.rainbow.getxPosition(),this.rainbow.getyPosition(),paintbrush);
+//            this.canvas.drawBitmap(this.candy.getImage(),this.candy.getxPosition(),this.candy.getyPosition(),paintbrush);
+//            this.canvas.drawBitmap(this.garbage.getImage(),this.garbage.getxPosition(),this.garbage.getyPosition(),paintbrush);
 
             // DRAW THE PLAYER HITBOX
             // ------------------------
