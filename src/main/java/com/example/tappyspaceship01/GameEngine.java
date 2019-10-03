@@ -177,16 +177,34 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     public void updatePositions() {
 
-        this.object.setxPosition(this.object.getxPosition() + 20);
+        int x = this.object.getHitbox().centerX();
+        System.out.println("Xxxxxxxxxxxxxcxcxcxcxcxcxcxcxxzcx: " +x);
+        this.objectMovement();
+        if ((this.object.getHitbox().intersect(this.player.getHitbox())) == true){
+            this.lives = this.lives - 1;
+            Log.d(TAG,"LIVES ARE :"+ this.lives);
+        }
+
+
+    }
+
+    public void objectMovement(){
+        int objectX = this.object.getxPosition();
+        if (objectX < this.screenWidth- this.player.getImage().getWidth()){
+            this.object.updateHitBox();
+            this.object.setxPosition(this.object.getxPosition() + 20);
+        }
 
     }
     public void playerMovement(){
+
         if ((this.playerMoveUp == true)&&(this.player.getyPosition()> 0)){
             this.player.setyPosition(player.getyPosition() - 200);
         }
         else if ((this.playerMoveUp == false)&&(this.player.getyPosition()< this.screenHeight - 150)){
             this.player.setyPosition(player.getyPosition() + 200);
         }
+        this.player.updateHitBox();
     }
 
     public void redrawSprites() {

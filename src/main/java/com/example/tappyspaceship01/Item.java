@@ -32,6 +32,7 @@ public class Item {
                 this.yPosition,
                 this.xPosition + this.image.getWidth(),
                 this.yPosition + this.image.getHeight()
+
         );
     }
 
@@ -68,5 +69,12 @@ public class Item {
 
     public void setyPosition(int yPosition) {
         this.yPosition = yPosition;
+    }
+
+    public void updateHitBox(){
+        hitbox.left = xPosition;
+        hitbox.top = yPosition;
+        hitbox.right = xPosition+image.getWidth();
+        hitbox.bottom = yPosition+image.getHeight();
     }
 }
