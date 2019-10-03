@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.media.Image;
 
 public class Item {
 
@@ -16,13 +17,14 @@ public class Item {
     private int xPosition;
     private int yPosition;
 
-    public Item(Context context, int x, int y) {
+    public Item(Context context, int x, int y, int imagePath) {
         // 1. set up the initial position of the Enemy
         this.xPosition = x;
         this.yPosition = y;
+        this.image = BitmapFactory.decodeResource(context.getResources(), imagePath);
 
         // 2. Set the default image - all enemies have same image
-        this.image = BitmapFactory.decodeResource(context.getResources(), R.drawable.alien_ship2);
+        //this.image = BitmapFactory.decodeResource(context.getResources(), R.drawable.alien_ship2);
 
         // 3. Set the default hitbox - all enemies have same hitbox
         this.hitbox = new Rect(

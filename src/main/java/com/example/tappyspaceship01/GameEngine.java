@@ -37,7 +37,12 @@ public class GameEngine extends SurfaceView implements Runnable {
     Canvas canvas;
     Paint paintbrush;
     Player player;
+    Item rainbow;
+    Item candy;
+    Item garbage;
     boolean playerMoveUp;
+    public ArrayList<Item> objects = new ArrayList<Item>();
+
 
 
 
@@ -78,7 +83,13 @@ public class GameEngine extends SurfaceView implements Runnable {
 //        this.lane3Y = this.screenHeight/6+400;
 //        this.lane4Y = this.screenHeight/6+500;
 
+
+
         player =  new Player(context,this.screenWidth - 200,(this.screenHeight/6+200) - 150);
+        rainbow = new Item(context,20,(this.screenHeight/6+200)-150,R.drawable.rainbow64);
+        candy = new Item(context,20,(this.screenHeight/6)-150,R.drawable.candy64);
+        garbage = new Item(context,20,(this.screenHeight/6+400)-150,R.drawable.poop64);
+
 
         this.printScreenInfo();
     }
@@ -165,7 +176,9 @@ public class GameEngine extends SurfaceView implements Runnable {
             this.canvas.drawText("SCORE = " +this.score+"",this.screenWidth-300,50,paintbrush);
             this.canvas.drawText("LIVES = " +this.lives+"",this.screenWidth-700,50,paintbrush);
             this.canvas.drawBitmap(this.player.getImage(),this.player.getxPosition(),this.player.getyPosition(),paintbrush);
-
+            this.canvas.drawBitmap(this.rainbow.getImage(),this.rainbow.getxPosition(),this.rainbow.getyPosition(),paintbrush);
+            this.canvas.drawBitmap(this.candy.getImage(),this.candy.getxPosition(),this.candy.getyPosition(),paintbrush);
+            this.canvas.drawBitmap(this.garbage.getImage(),this.garbage.getxPosition(),this.garbage.getyPosition(),paintbrush);
 
             // DRAW THE PLAYER HITBOX
             // ------------------------
