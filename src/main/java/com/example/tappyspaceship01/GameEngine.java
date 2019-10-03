@@ -136,7 +136,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     public void updatePositions() {
 
-        this.playerMovement();
+
     }
     public void playerMovement(){
         if ((this.playerMoveUp == true)&&(this.player.getyPosition()> 0)){
@@ -204,9 +204,11 @@ public class GameEngine extends SurfaceView implements Runnable {
         if (userAction == MotionEvent.ACTION_DOWN) {
             if (fingerYPosition < this.screenHeight/2){
                 this.playerMoveUp = true;
+                this.playerMovement();
             }
             else if(fingerYPosition > this.screenHeight /2){
                 this.playerMoveUp = false;
+                this.playerMovement();
             }
 
         }
