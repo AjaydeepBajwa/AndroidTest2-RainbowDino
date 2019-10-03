@@ -177,6 +177,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     public void updatePositions() {
 
+        this.object.setxPosition(this.object.getxPosition() + 20);
 
     }
     public void playerMovement(){
@@ -209,7 +210,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 //            for (int i=0;i<this.objects.size();i++){
 //                this.canvas.drawBitmap(this.objects.get(i).getImage(),this.objects.get(i).getxPosition(),this.objects.get(i).getyPosition(),paintbrush);
 //            }
-//            this.canvas.drawBitmap(this.player.getImage(),this.player.getxPosition(),this.player.getyPosition(),paintbrush);
+            this.canvas.drawBitmap(this.player.getImage(),this.player.getxPosition(),this.player.getyPosition(),paintbrush);
 //            this.canvas.drawBitmap(this.rainbow.getImage(),this.rainbow.getxPosition(),this.rainbow.getyPosition(),paintbrush);
 //            this.canvas.drawBitmap(this.candy.getImage(),this.candy.getxPosition(),this.candy.getyPosition(),paintbrush);
 //            this.canvas.drawBitmap(this.garbage.getImage(),this.garbage.getxPosition(),this.garbage.getyPosition(),paintbrush);
